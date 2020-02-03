@@ -185,9 +185,28 @@ doSwap:
         # }
 
         # TODO: fill in the code
+	la $t0, myArray
+	li $t1, 0
+	li $t2, 8
+loop:
+	beq $t1, 4, jump
 
-	
+	#store logical right shifts
+	sll $t3, $t1, 2
+	sll $t4, $t2, 2
+	#append memory address
+	addu $t3, $t0, $t3
+	addu $t4, $t0, $t4
+	#swap
+	lw $t7, 0($t3)
+	lw $t6, 0($t4)
+	sw $t6, 0($t3)
+	sw $t7, 0($t4)
+	#increment
+	addiu $t1, $t1, 1
+	addi $t2, $t2, -1
+	j loop
         # do not remove this last line
-        
+jump:
 	jr $ra
 	
